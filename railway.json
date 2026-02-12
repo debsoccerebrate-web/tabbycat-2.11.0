@@ -4,7 +4,7 @@
     "builder": "dockerfile"
   },
   "deploy": {
-    "startCommand": "npm run railway-serve",
+    "startCommand": "./bin/railway-serve.sh",
     "restartPolicyMaxRetries": 5
   }
 }

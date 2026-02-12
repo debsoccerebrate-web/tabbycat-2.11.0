@@ -20,6 +20,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
 # Copy all our files into the baseimage and cd to that directory
 WORKDIR /tcd
 COPY . /tcd/
+RUN chmod +x /tcd/bin/railway-serve.sh || true
 
 # Set git to use HTTPS (SSH is often blocked by firewalls)
 RUN git config --global url."https://".insteadOf git://
