@@ -10,16 +10,16 @@ ENV PYTHONUNBUFFERED 1
 # Needed for correct settings input
 ENV IN_DOCKER 1
 
-# Setup Node/NPM
+# Setup Node/NPM (install from NodeSource so `npm` is available in build)
 RUN apt-get update
-RUN apt-get install -y curl nginx
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+RUN apt-get install -y curl nginx gnupg ca-certificates
+# Use NodeSource to install a supported Node.js + npm package
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+	&& apt-get install -y nodejs
 
 # Copy all our files into the baseimage and cd to that directory
 WORKDIR /tcd
 COPY . /tcd/
-
-RUN nvm install && nvm use
 
 # Set git to use HTTPS (SSH is often blocked by firewalls)
 RUN git config --global url."https://".insteadOf git://
