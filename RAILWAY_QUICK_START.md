@@ -45,6 +45,8 @@ TIME_ZONE=Etc/UTC
 USING_NGINX=0
 ```
 
+Important: Do NOT set `IN_DOCKER` or `DOCKER_REDIS` in Railway variables — those are used for local Docker Compose and will make Django load `docker.py`, which hardcodes the database host to `db` (not resolvable on Railway).
+
 **Generate a secret key:**
 ```python
 from django.core.management.utils import get_random_secret_key
